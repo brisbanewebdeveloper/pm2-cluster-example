@@ -1,0 +1,29 @@
+{
+  "name": "pm2-cluster-example",
+  "version": "1.0.0",
+  "description": "Example of how to use the message feature with PM2 Cluster.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hironozu/pm2-cluster-example.git"
+  },
+  "keywords": [
+    "PM2",
+    "Cluster"
+  ],
+  "author": "Hiro Nozu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hironozu/pm2-cluster-example/issues"
+  },
+  "homepage": "https://github.com/hironozu/pm2-cluster-example#readme",
+  "dependencies": {
+    "extend": ">=3.0.2",
+    "lodash": ">=4.17.11",
+    "argv": "0.0.2",
+    "pm2": "^2.10.4"
+  }
+}
