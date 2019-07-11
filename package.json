@@ -22,8 +22,8 @@
   "homepage": "https://github.com/hironozu/pm2-cluster-example#readme",
   "dependencies": {
     "extend": ">=3.0.2",
-    "lodash": ">=4.17.11",
+    "lodash": ">=4.17.14",
     "argv": "0.0.2",
-    "pm2": "^2.10.4"
+    "pm2": "^3.5.1"
   }
 }
