@@ -1,7 +1,15 @@
 #!/bin/bash
 
-time node index.js
-time node index.js -i 2
-time node index.js -i 3
-time node index.js -i 4
-time node index.js -i 7
+node index.js
+
+echo
+node index.js -i 2
+
+echo
+node index.js -i 3
+
+echo
+node index.js -i 4
+
+echo
+node index.js -i 7

@@ -81,6 +81,8 @@ pm2.connect(true, async err => {
 
     // Master receives the request from Worker
 
+    const now = Date.now();
+
     sock = axon.socket('rep');
     let tasks = [];
 
@@ -154,7 +156,7 @@ pm2.connect(true, async err => {
     pm2.delete('index', err => {
       if (err) console.log(err);
       pm2.disconnect();
-      console.log('Finished');
+      console.log(`Finished - ${ Date.now() - now }ms`);
       process.exit(0);
     });
   }
