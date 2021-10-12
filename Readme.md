@@ -18,8 +18,8 @@ cp test.example.sh test.sh
 ## Examples
 
 ```shell
-time node index.js
+time node index.js --verbose
 time node index.js -i 2 --verbose
-time node index.js -i 4
+time node index.js -i 4 --verbose
 time node index.js -p 30000 -i 7
 ```
