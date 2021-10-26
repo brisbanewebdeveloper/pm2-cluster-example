@@ -46,10 +46,10 @@ const args = argv.run();
 
 const port = args.options.port || 60000;
 const instances = args.options.instances || 1;
-const taskCnt = args.options.tasks || 50000; // Math.max((Math.random() * 100000).toFixed(), 10000);
+const taskCnt = args.options.tasks || 10000; // Math.max((Math.random() * 100000).toFixed(), 10000);
 
 function request(sock) {
-  sock.send('request', [], res => {
+  sock.send('request', [], (res) => {
     console.log('Received', res);
     if (res !== null) {
       sock.send('resolved', res, () => {});
@@ -59,10 +59,11 @@ function request(sock) {
 }
 
 const pm2 = require('pm2');
-pm2.connect(true, async err => {
+pm2.connect(true, async (err) => {
 
   if (err) {
     console.error(err);
+    // eslint-disable-next-line no-undef
     process.exit(1);
   }
 
@@ -86,8 +87,8 @@ pm2.connect(true, async err => {
     sock = axon.socket('rep');
     let tasks = [];
 
-    await new Promise((resolve, error) => {
-      pm2.delete('index', err => {
+    await new Promise((resolve) => {
+      pm2.delete('index', (err) => {
         if (err) {
           //console.error('!!! Failed at deleting app', err);
         } else {
@@ -97,7 +98,7 @@ pm2.connect(true, async err => {
       });
     });
 
-    const promise = new Promise(resolve => {
+    const promise = new Promise((resolve) => {
 
       for (let i = 0; i < taskCnt; i++) tasks.push(`task ${i + 1}`);
       let taskReceived = 0;
@@ -135,28 +136,31 @@ pm2.connect(true, async err => {
     console.log(`Port: ${port}`, `Tasks: ${taskCnt}`, `Instance: ${instances}`);
 
     setTimeout(() => {
-      pm2.start({
-        script: 'index.js',
-        exec_mode: 'cluster',
-        instances: instances,
-        args: `--worker -p ${port}`,
-      }, async (err, apps) => {
-        if (err) {
-          console.error('!!! Failed at starting app', err);
-          error();
-        } else {
-          console.log('Executing');
-        }
-      });
+      pm2.start(
+        {
+          script: 'index.js',
+          exec_mode: 'cluster',
+          instances,
+          args: `--worker -p ${port}`,
+        },
+        (err) => {
+          if (err) {
+            console.error('!!! Failed at starting app', err);
+          } else {
+            console.log('Executing');
+          }
+        },
+      );
     }, 3000);
 
     await promise;
 
     if (args.options.verbose) console.log('Deleting workers');
-    pm2.delete('index', err => {
+    pm2.delete('index', (err) => {
       if (err) console.log(err);
       pm2.disconnect();
       console.log(`Finished - ${ Date.now() - now }ms`);
+      // eslint-disable-next-line no-undef
       process.exit(0);
     });
   }
