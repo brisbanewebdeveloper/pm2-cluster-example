@@ -46,7 +46,7 @@ const args = argv.run();
 
 const port = args.options.port || 60000;
 const instances = args.options.instances || 1;
-const taskCnt = args.options.tasks || 1000; // Math.max((Math.random() * 100000).toFixed(), 10000);
+const taskCnt = args.options.tasks || 500; // Math.max((Math.random() * 100000).toFixed(), 10000);
 
 function request(sock) {
   sock.send('request', [], (res) => {
